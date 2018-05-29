@@ -24,7 +24,9 @@ public class main {
 		InfluxDB influxDB = InfluxDBFactory.connect("http://10.88.2.105:8086", "root", "root");
 		String dbName = "kxw_metrics_v2";
 		String rpName = "rp_3h";
+
 		boolean isStart = true;
+
 		if(!influxDB.databaseExists(dbName))
 		{
 			influxDB.createDatabase(dbName);
@@ -33,9 +35,13 @@ public class main {
 			//influxDB.createRetentionPolicy(rpName, dbName, "30d", "30m", 2, true);
 			//influxDB.setRetentionPolicy(rpName);
 		}
+
 		influxDB.setDatabase(dbName);
 		influxDB.setRetentionPolicy(rpName);
 
+
+
+		influxDB.createDatabase(dbName);
 		//influxDB.en
 
 		//influxDB.enableBatch(BatchOptions.DEFAULTS.actions(1).flushDuration(100));
