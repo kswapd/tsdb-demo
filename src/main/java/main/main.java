@@ -6,7 +6,7 @@ package main;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import org.influxdb.BatchOptions;
+//import org.influxdb.BatchOptions;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDB.ConsistencyLevel;
 import org.influxdb.InfluxDBFactory;
@@ -36,9 +36,9 @@ public class main {
 		influxDB.setDatabase(dbName);
 		influxDB.setRetentionPolicy(rpName);
 
-		//influxDB.enableBatch();
+		//influxDB.en
 
-		influxDB.enableBatch(BatchOptions.DEFAULTS.actions(1).flushDuration(100));
+		//influxDB.enableBatch(BatchOptions.DEFAULTS.actions(1).flushDuration(100));
 
 		while(isStart) {
 			int randIdle = (int)(Math.random()*30);
