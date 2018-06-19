@@ -28,7 +28,8 @@ public class main {
 		boolean isStart = true;
 
 		//influxDB.deleteDatabase(dbName);
-		if(!influxDB.databaseExists(dbName))
+
+		//if(!influxDB.databaseExists(dbName))
 		{
 			influxDB.createDatabase(dbName);
 
@@ -37,8 +38,8 @@ public class main {
 			//influxDB.setRetentionPolicy(rpName);
 		}
 
-		influxDB.setDatabase(dbName);
-		influxDB.setRetentionPolicy(rpName);
+		//influxDB.setDatabase(dbName);
+		//influxDB.setRetentionPolicy(rpName);
 
 
 
@@ -53,7 +54,7 @@ public class main {
 			int randSys = (int)(Math.random()*10);
 			int randDiskUsed = (int)(Math.random()*50);
 			int randDiskFree = (int)(Math.random()*50);
-			influxDB.write(Point.measurement("cpu")
+			influxDB.write(dbName,rpName, Point.measurement("cpu")
 					.time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
 					.addField("idle", 90L + randIdle)
 					.addField("user", 9L + randUser)
@@ -61,7 +62,7 @@ public class main {
 					.tag("host", "kxw_v2")
 					.build());
 
-			influxDB.write(Point.measurement("disk")
+			influxDB.write(dbName,rpName, Point.measurement("disk")
 					.time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
 					.addField("used", 80L +randDiskUsed)
 					.addField("free", 300L + randDiskFree)
@@ -74,11 +75,7 @@ public class main {
 
 			}
 
-
-
-
-
-
+			
 
 			System.out.println("ok:"+ new Date().toString());
 
