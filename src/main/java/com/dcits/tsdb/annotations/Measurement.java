@@ -1,19 +1,20 @@
-package com.dcits.tsdb.tsdb.annotations;
+package com.dcits.tsdb.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by kongxiangwen on 6/19/18 w:25.
  */
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Column {
+@Target(ElementType.TYPE)
+public @interface Measurement {
 
 	String name();
 
-	boolean tag() default false;
+	TimeUnit timeUnit() default TimeUnit.MILLISECONDS;
 }

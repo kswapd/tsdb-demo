@@ -1,0 +1,4 @@
+influxdb:
+  address: http://10.88.2.107:8086
+  user: root
+  password: root

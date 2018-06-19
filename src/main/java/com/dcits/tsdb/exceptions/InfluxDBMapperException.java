@@ -1,4 +1,4 @@
-package com.dcits.tsdb.tsdb.exceptions;
+package com.dcits.tsdb.exceptions;
 
 /**
  * Created by kongxiangwen on 6/19/18 w:25.

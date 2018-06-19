@@ -1,8 +1,8 @@
-package com.dcits.tsdb.tsdb.utils;
+package com.dcits.tsdb.utils;
 
-import com.dcits.tsdb.tsdb.annotations.Column;
-import com.dcits.tsdb.tsdb.annotations.Measurement;
-import com.dcits.tsdb.tsdb.exceptions.InfluxDBMapperException;
+import com.dcits.tsdb.annotations.Column;
+import com.dcits.tsdb.annotations.Measurement;
+import com.dcits.tsdb.exceptions.InfluxDBMapperException;
 import java.lang.reflect.Field;
 
 import java.util.LinkedList;

@@ -1,7 +1,7 @@
-package com.dcits.tsdb.tsdb.pojos;
+package com.dcits.tsdb.pojos;
 
-import com.dcits.tsdb.tsdb.annotations.Column;
-import com.dcits.tsdb.tsdb.annotations.Measurement;
+import com.dcits.tsdb.annotations.Column;
+import com.dcits.tsdb.annotations.Measurement;
 
 /**
  * Created by kongxiangwen on 6/19/18 w:25.
@@ -14,6 +14,8 @@ public class Cpu {
 	@Column(name = "time")
 	private String time;
 
+	@Column(name = "host")
+	private String host;
 	@Column(name = "idle")
 	private Integer idle;
 
@@ -24,8 +26,9 @@ public class Cpu {
 	private Integer system;
 
 	public String toString(){
-		return String.format("cpu info:[time:%s, user:%d, system:%d, idle:%d", time, user,system, idle);
+		return String.format("cpu info[host = %s]:[time:%s, user:%d, system:%d, idle:%d]", host,time, user,system, idle);
 	}
+
 
 	// getters (and setters if you need)
 }

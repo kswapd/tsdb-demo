@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:property-placeholder location="classpath*:tsdb.properties" />
+    <context:component-scan base-package="com.dcits.tsdb.*"></context:component-scan>
+
+    <!-- 引入服务提供者配置文件 -->
+        <!--
+            <import resource="classpath:dubbo.xml" />
+
+
+        <dubbo:protocol name="dubbo" port="${provider.port}" serialization="java"/>
+
+        -->
+
+        <!-- 配置Bean -->
+<bean id="tsdbEngine" class="com.dcits.tsdb.impl.InfluxDBEngine">
+    <property name="address" value="${influxdb.address}"/>
+    <property name="user" value="${influxdb.user}"/>
+    <property name="password" value="${influxdb.password}"/>
+    <property name="dbName" value="${influxdb.dbName}"/>
+    <property name="rpName" value="${influxdb.rpName}"/>
+    <property name="maxBatchSize" value="${influxdb.maxBatchSize}"/>
+    <property name="maxBatchInterval" value="${influxdb.maxBatchInterval}"/>
+</bean>
+</beans>
