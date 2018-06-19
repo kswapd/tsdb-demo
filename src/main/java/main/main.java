@@ -21,12 +21,13 @@ import org.influxdb.dto.QueryResult;
 public class main {
 
 	public static void main(String args[]){
-		InfluxDB influxDB = InfluxDBFactory.connect("http://10.88.2.105:8086", "root", "root");
+		InfluxDB influxDB = InfluxDBFactory.connect("http://10.88.2.107:8086", "root", "root");
 		String dbName = "kxw_metrics_v2";
-		String rpName = "rp_3h";
+		String rpName = "rp_30d";
 
 		boolean isStart = true;
 
+		//influxDB.deleteDatabase(dbName);
 		if(!influxDB.databaseExists(dbName))
 		{
 			influxDB.createDatabase(dbName);
@@ -41,7 +42,7 @@ public class main {
 
 
 
-		influxDB.createDatabase(dbName);
+		//influxDB.createDatabase(dbName);
 		//influxDB.en
 
 		//influxDB.enableBatch(BatchOptions.DEFAULTS.actions(1).flushDuration(100));
@@ -57,14 +58,14 @@ public class main {
 					.addField("idle", 90L + randIdle)
 					.addField("user", 9L + randUser)
 					.addField("system", 1L+randSys)
-					.tag("host", "kxw_v1")
+					.tag("host", "kxw_v2")
 					.build());
 
 			influxDB.write(Point.measurement("disk")
 					.time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
 					.addField("used", 80L +randDiskUsed)
 					.addField("free", 300L + randDiskFree)
-					.tag("host", "kxw_v1")
+					.tag("host", "kxw_v2")
 					.build());
 
 			try {
