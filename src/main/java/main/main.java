@@ -3,6 +3,8 @@ package main;
 
 
 
+import com.dcits.tsdb.tsdb.pojos.Cpu;
+import com.dcits.tsdb.tsdb.utils.InfluxDBResultMapper;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -40,6 +42,7 @@ public class main {
 			//influxDB.setRetentionPolicy(rpName);
 		}
 
+		influxDB.enableBatch(5, 100, TimeUnit.MILLISECONDS);
 		//influxDB.setDatabase(dbName);
 		//influxDB.setRetentionPolicy(rpName);
 
@@ -74,10 +77,17 @@ public class main {
 			QueryResult queryResult = influxDB.query(new Query("SELECT * FROM cpu WHERE time > now() - 5m order by time desc limit 10", dbName));
 
 			List<Result> results = queryResult.getResults();
-			for (QueryResult.Result result : results) {
+			/*for (QueryResult.Result result : results) {
 				System.out.println(result.toString());
-			}
+			}*/
 
+
+			InfluxDBResultMapper resultMapper = new InfluxDBResultMapper(); // thread-safe - can be reused
+			List<Cpu> cpuList = resultMapper.toPOJO(queryResult, Cpu.class);
+
+			for(Cpu cpu:cpuList){
+				System.out.println(cpu.toString());
+			}
 			try {
 				Thread.sleep(1000);
 			}catch(InterruptedException e){
