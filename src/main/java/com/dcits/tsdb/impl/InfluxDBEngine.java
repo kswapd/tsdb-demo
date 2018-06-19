@@ -12,23 +12,36 @@ import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by kongxiangwen on 6/19/18 w:25.
  */
+
+@Repository("tsdbEngine")
 public class InfluxDBEngine implements TSDBEngine{
 
+
+	@Value("${influxdb.address}")
 	private String address;
+	@Value("${influxdb.user}")
 	private String user;
+	@Value("${influxdb.password}")
 	private String password;
 
-	private static InfluxDBEngine influxDBengine = null;
-
-	private  InfluxDB influxDB = null;
+	@Value("${influxdb.dbName}")
 	private String dbName = "kxw_metrics_v2";
+	@Value("${influxdb.rpName}")
 	private String rpName = "rp_30d";
+	@Value("${influxdb.maxBatchSize}")
 	private int maxBatchSize = 5;
+	@Value("${influxdb.maxBatchInterval}")
 	private int maxBatchInterval = 100;
+
+	private static InfluxDBEngine influxDBengine = null;
+	private  InfluxDB influxDB = null;
 
 
 	@PreDestroy
@@ -49,21 +62,26 @@ public class InfluxDBEngine implements TSDBEngine{
 		influxDB.enableBatch(maxBatchSize, maxBatchInterval, TimeUnit.MILLISECONDS);
 	}
 
-
-	public void write(String dbName, String rpName, Point data)
+	@Override
+	public void write(Point data)
 	{
+
 		influxDB.write(dbName, rpName, data);
 	}
 
-	public QueryResult query(String dbName, String queryLang)
+	@Override
+	public QueryResult query(String queryLang)
 	{
 		QueryResult queryResult = influxDB.query(new Query(queryLang, dbName));
 		return queryResult;
 
 	}
-	public <T> List<T> queryPOJOs(String dbName, String queryLang, final Class<T> clazz)
+	@Override
+	public <T> List<T> queryPOJOs(String queryLang, final Class<T> clazz)
 	{
-		QueryResult queryResult = query(dbName, queryLang);
+
+
+		QueryResult queryResult = query(queryLang);
 		InfluxDBResultMapper resultMapper = new InfluxDBResultMapper();
 		List<T> pojoList = null;
 		try {
@@ -85,7 +103,7 @@ public class InfluxDBEngine implements TSDBEngine{
 
 	}*/
 
-
+/*
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -112,7 +130,7 @@ public class InfluxDBEngine implements TSDBEngine{
 
 	public void setMaxBatchInterval(int maxBatchInterval) {
 		this.maxBatchInterval = maxBatchInterval;
-	}
+	}*/
 
 
 }
