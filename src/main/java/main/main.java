@@ -4,6 +4,7 @@ package main;
 
 
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 //import org.influxdb.BatchOptions;
@@ -14,6 +15,7 @@ import org.influxdb.dto.BatchPoints;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
+import org.influxdb.dto.QueryResult.Result;
 
 /**
  * Created by kongxiangwen on 5/28/18 w:22.
@@ -69,15 +71,22 @@ public class main {
 					.tag("host", "kxw_v2")
 					.build());
 
+			QueryResult queryResult = influxDB.query(new Query("SELECT * FROM cpu WHERE time > now() - 5m order by time desc limit 10", dbName));
+
+			List<Result> results = queryResult.getResults();
+			for (QueryResult.Result result : results) {
+				System.out.println(result.toString());
+			}
+
 			try {
 				Thread.sleep(1000);
 			}catch(InterruptedException e){
 
 			}
 
-			
 
-			System.out.println("ok:"+ new Date().toString());
+
+			//System.out.println("ok:"+ new Date().toString());
 
 		}
 		/*Query query = new Query("SELECT * FROM cpu", dbName);
