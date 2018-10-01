@@ -32,13 +32,13 @@ public class InfluxDBEngine implements TSDBEngine{
 	private String password;
 
 	@Value("${influxdb.dbName}")
-	private String dbName = "kxw_metrics_v2";
+	private String dbName;
 	@Value("${influxdb.rpName}")
-	private String rpName = "rp_30d";
+	private String rpName;
 	@Value("${influxdb.maxBatchSize}")
-	private int maxBatchSize = 5;
+	private int maxBatchSize;
 	@Value("${influxdb.maxBatchInterval}")
-	private int maxBatchInterval = 100;
+	private int maxBatchInterval;
 
 	private static InfluxDBEngine influxDBengine = null;
 	private  InfluxDB influxDB = null;
@@ -93,44 +93,4 @@ public class InfluxDBEngine implements TSDBEngine{
 
 		return pojoList;
 	}
-	/*public static InfluxDBEngine createInstance()
-	{
-		if(engine == null){
-			engine = new InfluxDBEngine();
-
-		}
-		return engine;
-
-	}*/
-
-/*
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setDbName(String dbName) {
-		this.dbName = dbName;
-	}
-
-	public void setRpName(String rpName) {
-		this.rpName = rpName;
-	}
-
-	public void setMaxBatchSize(int maxBatchSize) {
-		this.maxBatchSize = maxBatchSize;
-	}
-
-	public void setMaxBatchInterval(int maxBatchInterval) {
-		this.maxBatchInterval = maxBatchInterval;
-	}*/
-
-
 }

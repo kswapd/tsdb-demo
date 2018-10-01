@@ -1,8 +1,0 @@
-influxdb:
-  address: http://10.88.2.107:8086
-  user: root
-  password: root
-  dbName: kxw_metrics_v2
-  rpName: rp_30d
-  maxBatchSize: 5
-  maxBatchInterval: 100
